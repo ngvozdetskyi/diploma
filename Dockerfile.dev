@@ -8,6 +8,8 @@ RUN npm ci
 
 COPY . .
 
+RUN npm install knex -g
+
 ENTRYPOINT ["tail"]
 
 CMD ["-f","/dev/null"]

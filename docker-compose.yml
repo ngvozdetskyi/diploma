@@ -1,4 +1,16 @@
+version: '3.8'
+
 services:
+  database:
+    image: postgres:alpine3.18
+    restart: always
+    container_name: database
+    ports:
+      - ${DB_HOST_PORT}:${DB_CONTAINER_PORT}
+    environment:
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_USER: ${DB_ADMIN}
+      POSTGRES_DB: ${DB_NAME}
   api:
     build:
       context: .
@@ -12,3 +24,9 @@ services:
     environment:
       PORT: ${PORT}
       HOST: ${HOST}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_USER: ${DB_ADMIN}
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_HOST: database
+      POSTGRES_PORT: ${DB_HOST_PORT}
+      POSTGRES_MAX_CONNECTIONS: ${DB_MAX_CONNECTIONS}
