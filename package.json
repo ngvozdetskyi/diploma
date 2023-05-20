@@ -1,0 +1,23 @@
+{
+  "name": "diploma",
+  "version": "0.0.1",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "start:dev": "cat ./config/.env-dev > .env && docker-compose up --build -d && rm .env && docker exec -it api sh",
+    "down:dev": "cat ./config/.env-dev > .env && docker-compose down && rm .env"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ngvozdetskyi/diploma.git"
+  },
+  "engines": {
+    "node": "18.16.0"
+  },
+  "author": "Mykyta Gvozdetskyi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ngvozdetskyi/diploma/issues"
+  },
+  "homepage": "https://github.com/ngvozdetskyi/diploma#readme"
+}
