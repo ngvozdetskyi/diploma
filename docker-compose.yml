@@ -1,0 +1,13 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: ./Dockerfile.dev
+    container_name: api
+    restart: always
+    ports:
+      - ${PORT}:${PORT}
+    volumes:
+      - ./src:/app/src
+    environment:
+      PORT: ${PORT}

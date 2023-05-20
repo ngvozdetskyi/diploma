@@ -1,0 +1,13 @@
+.gitignorenode_modules
+docker-compose.yml
+Dockerfile
+config
+Dockerfile.dev
+README.md
+.eslintrc.js
+.idea
+.gitignore
+.prettierrc
+.env
+.dockerignore
+.git
