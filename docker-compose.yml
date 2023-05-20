@@ -8,6 +8,7 @@ services:
     ports:
       - ${PORT}:${PORT}
     volumes:
-      - ./src:/app/src
+      - .:/app
     environment:
       PORT: ${PORT}
+      HOST: ${HOST}
