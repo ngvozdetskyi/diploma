@@ -4,6 +4,8 @@ services:
   database:
     image: postgres:alpine3.18
     restart: always
+    volumes:
+      - db-data:/var/lib/postgresql/data
     container_name: database
     ports:
       - ${DB_HOST_PORT}:${DB_CONTAINER_PORT}
@@ -31,3 +33,6 @@ services:
       POSTGRES_HOST: database
       POSTGRES_PORT: ${DB_HOST_PORT}
       POSTGRES_MAX_CONNECTIONS: ${DB_MAX_CONNECTIONS}
+
+volumes:
+  db-data:
