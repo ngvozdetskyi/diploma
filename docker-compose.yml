@@ -24,6 +24,7 @@ services:
     environment:
       PORT: ${PORT}
       HOST: ${HOST}
+      SALT: ${SALT}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_USER: ${DB_ADMIN}
       POSTGRES_DB: ${DB_NAME}

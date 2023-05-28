@@ -11,7 +11,8 @@ const connectionConfig = {
         password: POSTGRES_PASSWORD,
         database: POSTGRES_DB,
     },
-    pool: { min: 2, max: Number(POSTGRES_MAX_CONNECTIONS) }
+    pool: { min: 2, max: Number(POSTGRES_MAX_CONNECTIONS) },
+    migrations: { directory: './src/db/postgres/migrations' },
 };
 
 module.exports = knex(connectionConfig);
