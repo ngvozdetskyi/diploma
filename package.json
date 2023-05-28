@@ -15,7 +15,7 @@
   "engines": {
     "node": "18.16.0"
   },
-  "author": "Mykyta Gvozdetskyi",
+  "author": "Nikita Gvozdetskyi",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/ngvozdetskyi/diploma/issues"

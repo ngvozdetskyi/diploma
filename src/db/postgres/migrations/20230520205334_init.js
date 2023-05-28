@@ -11,7 +11,7 @@ exports.up = async function(knex) {
             .notNullable()
             .defaultTo(knex.raw('uuid_generate_v4()'))
             .primary();
-        table.string('email').notNullable();
+        table.string('email').unique().notNullable();
         table.string('password').notNullable();
     });
 
@@ -21,12 +21,13 @@ exports.up = async function(knex) {
             .notNullable()
             .defaultTo(knex.raw('uuid_generate_v4()'))
             .primary();
-        table.string('email').notNullable();
+        table.string('email').unique().notNullable();
         table.string('password').notNullable();
         table.string('first_name').notNullable();
         table.string('last_name').notNullable();
         table.string('phone').notNullable();
-        table.string('student_id').notNullable();
+        table.string('student_id').unique().notNullable();
+        table.integer('borrowing_limit').defaultTo(3).notNullable();
     });
 
     await knex.schema.createTableIfNotExists('subject', (table) => {
@@ -35,7 +36,7 @@ exports.up = async function(knex) {
             .notNullable()
             .defaultTo(knex.raw('uuid_generate_v4()'))
             .primary();
-        table.string('title').notNullable();
+        table.string('title').unique().notNullable();
         table.text('description');
     });
 
@@ -45,7 +46,7 @@ exports.up = async function(knex) {
             .notNullable()
             .defaultTo(knex.raw('uuid_generate_v4()'))
             .primary();
-        table.string('title').notNullable();
+        table.string('title').unique().notNullable();
         table.text('description');
         table.integer('recovery_term_days');
         table.uuid('subject_id').references('subject.id');

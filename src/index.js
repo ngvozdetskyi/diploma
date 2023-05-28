@@ -1,3 +1,7 @@
 const app = require('./app');
+const dbClient = require('./db/postgres/client');
 
-app();
+(async () => {
+    await dbClient.migrate.latest();
+    await app();
+})();
