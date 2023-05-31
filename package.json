@@ -23,6 +23,8 @@
   "homepage": "https://github.com/ngvozdetskyi/diploma#readme",
   "dependencies": {
     "fastify": "4.17.0",
+    "fastify-guard": "2.0.0",
+    "ioredis": "5.3.2",
     "knex": "2.4.2",
     "pg": "8.11.0"
   },

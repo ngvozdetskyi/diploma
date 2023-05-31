@@ -25,6 +25,18 @@ class StudentService {
         await this.repository.update({ id }, student);
     }
 
+    find(filter, fields) {
+        return this.repository.find(filter, fields);
+    }
+
+    async findOne(filter, fields) {
+        const students = await this.repository.find(filter, fields);
+        if (!students.length) {
+            return;
+        }
+        return students[0];
+    }
+
     remove(data) {
         return this.repository.remove(data);
     }
