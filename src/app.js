@@ -3,12 +3,10 @@ const fastifyGuard = require('fastify-guard');
 const { verifyToken } = require('./modules/auth/auth-decorator');
 const studentRoute = require('./modules/student/student-route');
 const authRoute = require('./modules/auth/auth-route');
+const adminRoute = require('./modules/admin/admin-route');
 
 fastify.decorate('verifyToken', verifyToken);
 
-fastify.get('/', function (request, res) {
-    res.send('Hello world!').status(200);
-});
 fastify.register(
     fastifyGuard,
     {
@@ -19,6 +17,7 @@ fastify.register(
     }
 );
 fastify.register(studentRoute);
+fastify.register(adminRoute);
 fastify.register(authRoute);
 
 const start = async () => {
