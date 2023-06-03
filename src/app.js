@@ -4,6 +4,8 @@ const { verifyToken } = require('./modules/auth/auth-decorator');
 const studentRoute = require('./modules/student/student-route');
 const authRoute = require('./modules/auth/auth-route');
 const adminRoute = require('./modules/admin/admin-route');
+const bookRoute = require('./modules/book/book-route');
+const borrowingRoute = require('./modules/borrowing/borrowing-route');
 
 fastify.decorate('verifyToken', verifyToken);
 
@@ -17,8 +19,10 @@ fastify.register(
     }
 );
 fastify.register(studentRoute);
+fastify.register(bookRoute);
 fastify.register(adminRoute);
 fastify.register(authRoute);
+fastify.register(borrowingRoute);
 
 const start = async () => {
     try {

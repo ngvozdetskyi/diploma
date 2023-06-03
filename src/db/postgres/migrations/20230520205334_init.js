@@ -48,7 +48,7 @@ exports.up = async function(knex) {
             .primary();
         table.string('title').unique().notNullable();
         table.text('description');
-        table.integer('recovery_term_days');
+        table.integer('return_term_days').defaultTo(60);
         table.uuid('subject_id').references('subject.id');
     });
 
@@ -61,7 +61,7 @@ exports.up = async function(knex) {
         table.uuid('student_id').notNullable().references('student.id').onDelete('CASCADE');
         table.uuid('book_id').notNullable().references('book.id').onDelete('CASCADE');
         table.string('receiving_date').notNullable();
-        table.string('recovery_date').notNullable();
+        table.string('return_date').notNullable();
     });
 };
 

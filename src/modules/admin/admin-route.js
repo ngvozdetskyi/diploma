@@ -1,4 +1,4 @@
-const { login } = require('./auth-validation-schemas');
+const { login } = require('./admin-validation-schemas');
 const adminController = require('./admin-controller');
 
 module.exports = async function (fastify) {
