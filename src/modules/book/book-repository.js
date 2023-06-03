@@ -1,11 +1,11 @@
 const BaseRepository = require('../common/common-repository');
 const dbClient = require('../../db/postgres/client');
 
-class StudentRepository extends BaseRepository {
+class BookRepository extends BaseRepository {
     constructor(client) {
         super(client);
         this.client = client;
-        this.table = 'student';
+        this.table = 'book';
     }
 
     create(data) {
@@ -13,16 +13,16 @@ class StudentRepository extends BaseRepository {
         return this._executeQuery(query, arguments);
     }
 
-    async doesStudentExist(data) {
+    async doesBookExist(data) {
         const query = this.client(this.table).select('*');
 
         for (const field in data) {
             query.orWhere({ [field]: data[field] });
         }
 
-        const students = await this._executeQuery(query, arguments);
+        const books = await this._executeQuery(query, arguments);
 
-        return Boolean(students.length);
+        return Boolean(books.length);
     }
 
     find(filter, fields = '*') {
@@ -30,7 +30,7 @@ class StudentRepository extends BaseRepository {
         return this._executeQuery(query, arguments);
     }
 
-     update(filter, data) {
+    update(filter, data) {
         const query = this.client(this.table).update(data).where(filter);
         return this._executeQuery(query, arguments);
     }
@@ -41,4 +41,4 @@ class StudentRepository extends BaseRepository {
     }
 }
 
-module.exports = new StudentRepository(dbClient);
+module.exports = new BookRepository(dbClient);

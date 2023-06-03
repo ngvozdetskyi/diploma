@@ -21,8 +21,7 @@ class StudentService {
         if (!doesStudentExist) {
             throw new Error(`Student[${id}] does not exist!`);
         }
-        const student = new StudentModel(data);
-        await this.repository.update({ id }, student);
+        await this.repository.update({ id }, new StudentModel({ id, ...data }));
     }
 
     find(filter, fields) {
