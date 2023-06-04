@@ -1,10 +1,9 @@
-const crypto = require('crypto');
 const BaseModel = require('../common/common-model');
 
 class BorrowingModel extends BaseModel {
     constructor(data = {}) {
         super();
-        this.id = data.id || crypto.randomUUID();
+        this.id = data.id || this.generateUUID();
         this.student_id = data.studentId;
         this.book_id = data.bookId;
         this.receiving_date = data.receivingDate || new Date().toISOString();

@@ -1,11 +1,10 @@
-const crypto = require('crypto');
 const { hashPassword } = require('../../common');
 const BaseModel = require("../common/common-model");
 
 class StudentModel extends BaseModel {
     constructor(data = {}) {
         super();
-        this.id = data.id || crypto.randomUUID();
+        this.id = data.id || this.generateUUID();
         this.email = data.email;
         this.student_id = data.studentId;
         this.last_name = data.lastName;

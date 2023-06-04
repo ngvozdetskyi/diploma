@@ -6,6 +6,7 @@ const authRoute = require('./modules/auth/auth-route');
 const adminRoute = require('./modules/admin/admin-route');
 const bookRoute = require('./modules/book/book-route');
 const borrowingRoute = require('./modules/borrowing/borrowing-route');
+const orderRoute = require('./modules/order/order-route');
 
 fastify.decorate('verifyToken', verifyToken);
 
@@ -23,6 +24,7 @@ fastify.register(bookRoute);
 fastify.register(adminRoute);
 fastify.register(authRoute);
 fastify.register(borrowingRoute);
+fastify.register(orderRoute);
 
 const start = async () => {
     try {

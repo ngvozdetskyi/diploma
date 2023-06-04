@@ -8,9 +8,9 @@ class StudentRepository extends BaseRepository {
         this.table = 'student';
     }
 
-    create(data) {
+    async create(data) {
         const query = this.client(this.table).insert(data);
-        return this._executeQuery(query, arguments);
+        return await this._executeQuery(query, arguments);
     }
 
     async doesStudentExist(data) {
@@ -25,19 +25,19 @@ class StudentRepository extends BaseRepository {
         return Boolean(students.length);
     }
 
-    find(filter, fields = '*') {
+    async find(filter, fields = '*') {
         const query = this.client(this.table).select(fields).where(filter);
-        return this._executeQuery(query, arguments);
+        return await this._executeQuery(query, arguments);
     }
 
-     update(filter, data) {
+    async update(filter, data) {
         const query = this.client(this.table).update(data).where(filter);
-        return this._executeQuery(query, arguments);
+        return await this._executeQuery(query, arguments);
     }
 
-    remove(data) {
+    async remove(data) {
         const query = this.client(this.table).where(data).delete();
-        return this._executeQuery(query, arguments);
+        return await this._executeQuery(query, arguments);
     }
 }
 
