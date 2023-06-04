@@ -10,15 +10,12 @@ const orderRoute = require('./modules/order/order-route');
 
 fastify.decorate('verifyToken', verifyToken);
 
-fastify.register(
-    fastifyGuard,
-    {
-        errorHandler: (result, req, res) => {
-            console.error(`Access denied for user[${req.user.id}].`);
-            res.status(403).send('Access denied!')
-        },
-    }
-);
+fastify.register(fastifyGuard, {
+  errorHandler: (result, req, res) => {
+    console.error(`Access denied for user[${req.user.id}].`);
+    res.status(403).send('Access denied!');
+  },
+});
 fastify.register(studentRoute);
 fastify.register(bookRoute);
 fastify.register(adminRoute);
@@ -27,14 +24,14 @@ fastify.register(borrowingRoute);
 fastify.register(orderRoute);
 
 const start = async () => {
-    try {
-        const { PORT, HOST } = process.env;
-        await fastify.listen({ port: Number(PORT), host: HOST })
-        console.log(`Server successfully started on the ${PORT} port.`);
-    } catch (err) {
-        console.error(`Error during staring the app: ${err}`);
-        process.exit(1)
-    }
+  try {
+    const { PORT, HOST } = process.env;
+    await fastify.listen({ port: Number(PORT), host: HOST });
+    console.log(`Server successfully started on the ${PORT} port.`);
+  } catch (err) {
+    console.error(`Error during staring the app: ${err}`);
+    process.exit(1);
+  }
 };
 
 module.exports = start;

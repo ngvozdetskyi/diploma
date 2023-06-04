@@ -1,22 +1,22 @@
 const { hashPassword } = require('../../common');
-const BaseModel = require("../common/common-model");
+const BaseModel = require('../common/common-model');
 
 class StudentModel extends BaseModel {
-    constructor(data = {}) {
-        super();
-        this.id = data.id || this.generateUUID();
-        this.email = data.email;
-        this.student_id = data.studentId;
-        this.last_name = data.lastName;
-        this.first_name = data.firstName;
-        this.phone = data.phone;
-    }
+  constructor(data = {}) {
+    super();
+    this.id = data.id || this.generateUUID();
+    this.email = data.email;
+    this.student_id = data.studentId;
+    this.last_name = data.lastName;
+    this.first_name = data.firstName;
+    this.phone = data.phone;
+  }
 
-    async attachPassword(data = {}) {
-        if (data.password) {
-            this.password = await hashPassword(data.password);
-        }
+  async attachPassword(data = {}) {
+    if (data.password) {
+      this.password = await hashPassword(data.password);
     }
+  }
 }
 
 module.exports = StudentModel;

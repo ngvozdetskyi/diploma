@@ -4,9 +4,11 @@
   "description": "",
   "main": "src/index.js",
   "scripts": {
-    "start": "nodemon src/index.js",
-    "start:dev": "cat ./config/.env-dev > .env && docker-compose up --build -d && rm .env && docker exec -it api sh",
-    "down:dev": "cat ./config/.env-dev > .env && docker-compose down && rm .env"
+    "lint": "npx eslint --ext .js, src/ --max-warnings=0",
+    "lint-fix": "npx prettier -w .; npx eslint --ext .js, src/ --max-warnings=0 --fix",
+    "dev:start": "nodemon src/index.js",
+    "dev:up": "cat ./config/.env-dev > .env && docker-compose up --build -d && rm .env && docker exec -it api sh",
+    "dev:down": "cat ./config/.env-dev > .env && docker-compose down && rm .env"
   },
   "repository": {
     "type": "git",
@@ -29,6 +31,10 @@
     "pg": "8.11.0"
   },
   "devDependencies": {
-    "nodemon": "2.0.22"
+    "eslint": "8.42.0",
+    "eslint-config-prettier": "8.8.0",
+    "eslint-plugin-prettier": "4.2.1",
+    "nodemon": "2.0.22",
+    "prettier": "2.8.8"
   }
 }

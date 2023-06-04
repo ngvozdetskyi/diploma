@@ -1,4 +1,10 @@
-const { POSTGRES_PASSWORD, POSTGRES_USER, POSTGRES_DB, POSTGRES_HOST, POSTGRES_PORT } = process.env;
+const {
+  POSTGRES_PASSWORD,
+  POSTGRES_USER,
+  POSTGRES_DB,
+  POSTGRES_HOST,
+  POSTGRES_PORT,
+} = process.env;
 
 module.exports = {
   development: {
@@ -11,7 +17,7 @@ module.exports = {
       database: POSTGRES_DB,
     },
     migrations: {
-      directory: './src/db/postgres/migrations'
-    }
-  }
+      directory: './src/db/postgres/migrations',
+    },
+  },
 };
