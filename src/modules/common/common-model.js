@@ -1,5 +1,11 @@
+const crypto = require("crypto");
+
 class BaseModel {
     constructor() {
+    }
+
+    generateUUID() {
+        return crypto.randomUUID();
     }
 
     getFields(options = {}) {

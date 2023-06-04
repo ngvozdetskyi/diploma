@@ -1,21 +1,16 @@
 const BaseRepository = require('../common/common-repository');
 const dbClient = require('../../db/postgres/client');
 
-class BorrowingRepository extends BaseRepository {
+class OrderBookRepository extends BaseRepository {
     constructor(client) {
         super(client);
         this.client = client;
-        this.table = 'borrowing';
+        this.table = 'order-book';
     }
 
     async create(data) {
         const query = this.client(this.table).insert(data);
         return await this._executeQuery(query, arguments);
-    }
-
-    async find(filter, fields = '*') {
-        const query = this.client(this.table).select(fields).where(filter);
-        return this._executeQuery(query, arguments);
     }
 
     async remove(data) {
@@ -24,4 +19,4 @@ class BorrowingRepository extends BaseRepository {
     }
 }
 
-module.exports = new BorrowingRepository(dbClient);
+module.exports = new OrderBookRepository(dbClient);

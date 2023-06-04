@@ -2,12 +2,14 @@ const BorrowingModel = require('./borrowing-model');
 const borrowingRepository = require('./borrowing-repository');
 const studentRepository = require('../student/student-repository');
 const bookRepository = require('../book/book-repository');
+const orderBookRepository = require('../order-book/order-book-repository');
 
 class BorrowingService {
     constructor(borrowingRepository, studentRepository, bookRepository) {
         this.repository = borrowingRepository;
         this.studentRepository = studentRepository;
         this.bookRepository = bookRepository;
+        this.orderBookRepository = orderBookRepository;
     }
 
     async approveBorrowing(studentId, bookId) {
@@ -39,6 +41,9 @@ class BorrowingService {
                 this.studentRepository.update({ id: studentId }, student, transaction)
             ]);
             await transaction.commit();
+            this.orderBookRepository.remove({ book_id: bookId }).catch((res) => {
+                console.error(`OrderBook removing has failed due ${res}`);
+            });
         } catch (e) {
             await transaction.rollback();
             throw e;
@@ -69,4 +74,4 @@ class BorrowingService {
     }
 }
 
-module.exports = new BorrowingService(borrowingRepository, studentRepository, bookRepository);
+module.exports = new BorrowingService(borrowingRepository, studentRepository, bookRepository, orderBookRepository);

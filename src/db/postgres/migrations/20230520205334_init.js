@@ -59,9 +59,29 @@ exports.up = async function(knex) {
             .defaultTo(knex.raw('uuid_generate_v4()'))
             .primary();
         table.uuid('student_id').notNullable().references('student.id').onDelete('CASCADE');
-        table.uuid('book_id').notNullable().references('book.id').onDelete('CASCADE');
+        table.uuid('book_id').unique().notNullable().references('book.id').onDelete('CASCADE');
         table.string('receiving_date').notNullable();
         table.string('return_date').notNullable();
+    });
+
+    await knex.schema.createTableIfNotExists('order', (table) => {
+        table
+            .uuid('id')
+            .notNullable()
+            .defaultTo(knex.raw('uuid_generate_v4()'))
+            .primary();
+        table.uuid('student_id').notNullable().references('student.id').onDelete('CASCADE');
+        table.string('order_id').notNullable();
+    });
+
+    await knex.schema.createTableIfNotExists('order-book', (table) => {
+        table
+            .uuid('id')
+            .notNullable()
+            .defaultTo(knex.raw('uuid_generate_v4()'))
+            .primary();
+        table.uuid('order_id').notNullable().references('order.id').onDelete('CASCADE');
+        table.uuid('book_id').notNullable().references('book.id').onDelete('CASCADE');
     });
 };
 
@@ -75,4 +95,6 @@ exports.down = async function(knex) {
     await knex.schema.dropTableIfExists('subject');
     await knex.schema.dropTableIfExists('book');
     await knex.schema.dropTableIfExists('borrowing');
+    await knex.schema.dropTableIfExists('order');
+    await knex.schema.dropTableIfExists('order-book');
 };

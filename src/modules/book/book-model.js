@@ -1,10 +1,9 @@
-const crypto = require('crypto');
 const BaseModel = require('../common/common-model');
 
 class BookModel extends BaseModel {
     constructor(data = {}) {
         super();
-        this.id = data.id || crypto.randomUUID();
+        this.id = data.id || this.generateUUID();
         this.title = data.title;
         this.description = data.description;
         this.subject_id = data.subjectId;
