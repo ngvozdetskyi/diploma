@@ -1,5 +1,5 @@
 /**
- * @param { import("knex").Knex } knex
+ * @param { import('knex').Knex } knex
  * @returns { Promise<void> }
  */
 exports.up = async function (knex) {
@@ -25,7 +25,7 @@ exports.up = async function (knex) {
     table.string('password').notNullable();
     table.string('first_name').notNullable();
     table.string('last_name').notNullable();
-    table.string('phone').notNullable();
+    table.string('phone').unique().notNullable();
     table.string('student_id').unique().notNullable();
     table.integer('borrowing_limit').defaultTo(3).notNullable();
   });
@@ -47,6 +47,8 @@ exports.up = async function (knex) {
       .defaultTo(knex.raw('uuid_generate_v4()'))
       .primary();
     table.string('title').unique().notNullable();
+    table.string('author').notNullable();
+    table.string('issue_date').notNullable();
     table.text('description');
     table.integer('return_term_days').defaultTo(60);
     table.uuid('subject_id').references('subject.id');
@@ -84,7 +86,7 @@ exports.up = async function (knex) {
       .notNullable()
       .references('student.id')
       .onDelete('CASCADE');
-    table.string('order_id').notNullable();
+    table.string('order_number').notNullable();
   });
 
   await knex.schema.createTableIfNotExists('order-book', (table) => {
@@ -104,10 +106,29 @@ exports.up = async function (knex) {
       .references('book.id')
       .onDelete('CASCADE');
   });
+
+  await knex
+    .insert({
+      email: 'admin@gmail.com',
+      password:
+        'zXO6r7zAUHP2wLkXrFKLJWDNwhq2CAjgAJ815ntDRqQC8gNQGgxAeykyyjtMuM2XvL5UCNfu9Q6+hcqYAe57+w==',
+    })
+    .into('admin');
+  await knex
+    .insert({
+      phone: '+380575166903',
+      email: 'test222@test.com',
+      password:
+        'zXO6r7zAUHP2wLkXrFKLJWDNwhq2CAjgAJ815ntDRqQC8gNQGgxAeykyyjtMuM2XvL5UCNfu9Q6+hcqYAe57+w==',
+      first_name: 'Lisa',
+      last_name: 'Ivanova',
+      student_id: '8',
+    })
+    .into('student');
 };
 
 /**
- * @param { import("knex").Knex } knex
+ * @param { import('knex').Knex } knex
  * @returns { Promise<void> }
  */
 exports.down = async function (knex) {
