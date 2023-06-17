@@ -19,5 +19,8 @@ module.exports = {
     migrations: {
       directory: './src/db/postgres/migrations',
     },
+    seeds: {
+      directory: './src/db/postgres/seeds/dev',
+    },
   },
 };

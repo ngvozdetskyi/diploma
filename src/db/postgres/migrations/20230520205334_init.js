@@ -5,7 +5,7 @@
 exports.up = async function (knex) {
   await knex.raw('CREATE EXTENSION IF NOT EXISTS "uuid-ossp";');
 
-  await knex.schema.createTableIfNotExists('admin', (table) => {
+  await knex.schema.createTable('admin', (table) => {
     table
       .uuid('id')
       .notNullable()
@@ -15,7 +15,7 @@ exports.up = async function (knex) {
     table.string('password').notNullable();
   });
 
-  await knex.schema.createTableIfNotExists('student', (table) => {
+  await knex.schema.createTable('student', (table) => {
     table
       .uuid('id')
       .notNullable()
@@ -30,7 +30,7 @@ exports.up = async function (knex) {
     table.integer('borrowing_limit').defaultTo(3).notNullable();
   });
 
-  await knex.schema.createTableIfNotExists('subject', (table) => {
+  await knex.schema.createTable('subject', (table) => {
     table
       .uuid('id')
       .notNullable()
@@ -40,7 +40,7 @@ exports.up = async function (knex) {
     table.text('description');
   });
 
-  await knex.schema.createTableIfNotExists('book', (table) => {
+  await knex.schema.createTable('book', (table) => {
     table
       .uuid('id')
       .notNullable()
@@ -54,7 +54,7 @@ exports.up = async function (knex) {
     table.uuid('subject_id').references('subject.id');
   });
 
-  await knex.schema.createTableIfNotExists('borrowing', (table) => {
+  await knex.schema.createTable('borrowing', (table) => {
     table
       .uuid('id')
       .notNullable()
@@ -75,7 +75,7 @@ exports.up = async function (knex) {
     table.string('return_date').notNullable();
   });
 
-  await knex.schema.createTableIfNotExists('order', (table) => {
+  await knex.schema.createTable('order', (table) => {
     table
       .uuid('id')
       .notNullable()
@@ -89,7 +89,7 @@ exports.up = async function (knex) {
     table.string('order_number').notNullable();
   });
 
-  await knex.schema.createTableIfNotExists('order-book', (table) => {
+  await knex.schema.createTable('order-book', (table) => {
     table
       .uuid('id')
       .notNullable()
@@ -106,25 +106,6 @@ exports.up = async function (knex) {
       .references('book.id')
       .onDelete('CASCADE');
   });
-
-  await knex
-    .insert({
-      email: 'admin@gmail.com',
-      password:
-        'zXO6r7zAUHP2wLkXrFKLJWDNwhq2CAjgAJ815ntDRqQC8gNQGgxAeykyyjtMuM2XvL5UCNfu9Q6+hcqYAe57+w==',
-    })
-    .into('admin');
-  await knex
-    .insert({
-      phone: '+380575166903',
-      email: 'test222@test.com',
-      password:
-        'zXO6r7zAUHP2wLkXrFKLJWDNwhq2CAjgAJ815ntDRqQC8gNQGgxAeykyyjtMuM2XvL5UCNfu9Q6+hcqYAe57+w==',
-      first_name: 'Lisa',
-      last_name: 'Ivanova',
-      student_id: '8',
-    })
-    .into('student');
 };
 
 /**

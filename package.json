@@ -7,7 +7,7 @@
     "lint": "npx eslint --ext .js, src/ --max-warnings=0",
     "lint-fix": "npx prettier -w .; npx eslint --ext .js, src/ --max-warnings=0 --fix",
     "dev:start": "nodemon src/index.js",
-    "dev:up": "cat ./config/.env-dev > .env && docker-compose up --build -d && rm .env && docker exec -it api sh",
+    "dev:up": "bash src/bin/dev-up.bash",
     "dev:down": "cat ./config/.env-dev > .env && docker-compose down && rm .env"
   },
   "repository": {
