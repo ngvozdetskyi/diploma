@@ -26,20 +26,38 @@ class BookService {
     await this.repository.update({ id }, new BookModel({ id, ...data }));
   }
 
-  find(filter, fields) {
-    return this.repository.find(filter, fields);
-  }
+  getAll(params = {}) {
+    const {
+      pageSize = 25,
+      pageNumber,
+      title,
+      author,
+      issueDate: issue_date,
+    } = params;
+    const options = {};
+    const filter = {};
 
-  async findOne(filter, fields) {
-    const books = await this.repository.find(filter, fields);
-    if (!books.length) {
-      return;
+    if (title) {
+      filter.title = title;
     }
-    return books[0];
+
+    if (author) {
+      filter.author = author;
+    }
+
+    if (issue_date) {
+      filter.issue_date = issue_date;
+    }
+
+    if (pageNumber) {
+      options.limit = pageSize;
+      options.offset = (pageNumber - 1) * pageSize;
+    }
+    return this.repository.find(filter, '*', options);
   }
 
-  remove(data) {
-    return this.repository.remove(data);
+  remove(id) {
+    return this.repository.remove({ id });
   }
 }
 

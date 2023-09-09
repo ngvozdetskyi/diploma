@@ -6,7 +6,7 @@ module.exports = async function (fastify) {
     '/borrowing/approve',
     {
       schema: borrow,
-      preHandler: [fastify.verifyToken, fastify.guard.role(['admin'])],
+      preHandler: [fastify.verifyToken, fastify.guard.role('admin')],
     },
     borrowingController.approveBorrowing.bind(borrowingController)
   );
@@ -14,7 +14,7 @@ module.exports = async function (fastify) {
     '/borrowing/return',
     {
       schema: acceptReturn,
-      preHandler: [fastify.verifyToken, fastify.guard.role(['admin'])],
+      preHandler: [fastify.verifyToken, fastify.guard.role('admin')],
     },
     borrowingController.acceptReturn.bind(borrowingController)
   );

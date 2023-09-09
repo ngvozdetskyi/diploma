@@ -8,23 +8,23 @@ const { create, remove, update } = studentController;
 
 module.exports = async function (fastify) {
   fastify.post(
-    '/student/create',
+    '/student',
     {
       schema: createStudent,
-      preHandler: [fastify.verifyToken, fastify.guard.role(['admin'])],
+      preHandler: [fastify.verifyToken, fastify.guard.role('admin')],
     },
     create.bind(studentController)
   );
-  fastify.post(
-    '/student/remove',
+  fastify.delete(
+    '/student',
     {
       schema: removeStudent,
-      preHandler: [fastify.verifyToken, fastify.guard.role(['admin'])],
+      preHandler: [fastify.verifyToken, fastify.guard.role('admin')],
     },
     remove.bind(studentController)
   );
-  fastify.post(
-    '/student/update',
+  fastify.put(
+    '/student',
     { schema: updateStudent },
     update.bind(studentController)
   );

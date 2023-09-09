@@ -1,4 +1,4 @@
-const { hashPassword } = require('../../common');
+const { hashPassword } = require('../../utils');
 const BaseModel = require('../common/common-model');
 
 class StudentModel extends BaseModel {
@@ -6,10 +6,10 @@ class StudentModel extends BaseModel {
     super();
     this.id = data.id || this.generateUUID();
     this.email = data.email;
-    this.student_id = data.studentId;
-    this.last_name = data.lastName;
-    this.first_name = data.firstName;
     this.phone = data.phone;
+    this.student_id = data.studentId || data.student_id;
+    this.last_name = data.lastName || data.last_name;
+    this.first_name = data.firstName || data.first_name;
   }
 
   async attachPassword(data = {}) {

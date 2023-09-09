@@ -48,6 +48,7 @@ exports.up = async function (knex) {
       .primary();
     table.string('title').unique().notNullable();
     table.string('author').notNullable();
+    table.string('publication').notNullable();
     table.string('issue_date').notNullable();
     table.text('description');
     table.integer('return_term_days').defaultTo(60);

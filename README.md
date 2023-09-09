@@ -5,8 +5,8 @@ like searching books, borrowing them, create orders for books.
 
 ## Roles
 
-- Admin - someone from the library side who creates new students, books, approve borrowing books, etc.
-- Student - person who borrows books.
+- Admin - someone from the library side who creates new students, books, approves borrowing books, etc.
+- Student - person who looks for appropriate books and borrows them.
 
 ##Technologies
 
@@ -49,3 +49,4 @@ Run all commands in container(`npm run dev:up`).
 - REDIS_HOST_PORT=6379
 - REDIS_PASSWORD=1234567890
 - REDIS_USER=default
+- NODE_ENV=development

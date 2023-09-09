@@ -1,4 +1,4 @@
-const { hashPassword } = require('../../common');
+const { hashPassword } = require('../../utils');
 const { randomBytes } = require('crypto');
 const redis = require('../../db/redis/client');
 

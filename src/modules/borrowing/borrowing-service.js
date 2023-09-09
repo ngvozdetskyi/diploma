@@ -21,6 +21,7 @@ class BorrowingService {
         this.repository.find(
           { student_id: studentId, book_id: bookId },
           '*',
+          {},
           transaction
         ),
       ]);
@@ -60,8 +61,8 @@ class BorrowingService {
         this.studentRepository.update({ id: studentId }, student, transaction),
       ]);
       await transaction.commit();
-      this.orderBookRepository.remove({ book_id: bookId }).catch((res) => {
-        console.error(`OrderBook removing has failed due ${res}`);
+      this.orderBookRepository.remove({ book_id: bookId }).catch((err) => {
+        console.error(`OrderBook removing has failed due ${err}`);
       });
     } catch (e) {
       await transaction.rollback();

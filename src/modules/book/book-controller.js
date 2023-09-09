@@ -25,9 +25,19 @@ class BookController {
     }
   }
 
+  async getAll(req, res) {
+    try {
+      const books = await this.service.getAll(req.query);
+      res.status(200).send(books);
+    } catch (err) {
+      console.error(`Error during API call[${req.url}] due ${err}`);
+      res.status(400).send(err.message);
+    }
+  }
+
   async remove(req, res) {
     try {
-      await this.service.remove(req.body);
+      await this.service.remove(req.query.id);
       res.status(200).send('Book has been successfully removed.');
     } catch (err) {
       console.error(`Error during API call[${req.url}] due ${err}`);
