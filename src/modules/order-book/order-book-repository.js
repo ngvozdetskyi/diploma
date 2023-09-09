@@ -8,14 +8,14 @@ class OrderBookRepository extends BaseRepository {
     this.table = 'order-book';
   }
 
-  async create(data) {
+  async create(data, transaction) {
     const query = this.client(this.table).insert(data);
-    return await this._executeQuery(query, arguments);
+    return await this._executeQuery(query, transaction);
   }
 
-  async remove(data) {
+  async remove(data, transaction) {
     const query = this.client(this.table).where(data).delete();
-    return await this._executeQuery(query, arguments);
+    return await this._executeQuery(query, transaction);
   }
 }
 

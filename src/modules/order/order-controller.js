@@ -17,7 +17,7 @@ class OrderController {
 
   async remove(req, res) {
     try {
-      await this.service.remove(req.body.id, req.user.id);
+      await this.service.remove(req.query.id);
       res.status(200).send('The order has been removed!');
     } catch (err) {
       console.error(`Error during API call[${req.url}] due ${err}`);

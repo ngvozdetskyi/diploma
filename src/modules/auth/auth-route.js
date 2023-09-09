@@ -9,7 +9,7 @@ module.exports = async function (fastify) {
   );
   fastify.post(
     '/logout',
-    { preHandler: [fastify.verifyToken, fastify.guard.role(['student'])] },
+    { preHandler: [fastify.verifyToken, fastify.guard.role('student')] },
     authController.logout.bind(authController)
   );
 };

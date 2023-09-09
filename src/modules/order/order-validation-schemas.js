@@ -1,4 +1,4 @@
-const create = {
+const createOrder = {
   body: {
     type: 'object',
     required: ['bookIds'],
@@ -16,8 +16,8 @@ const create = {
   },
 };
 
-const remove = {
-  body: {
+const removeOrder = {
+  query: {
     type: 'object',
     required: ['id'],
     properties: {
@@ -26,4 +26,4 @@ const remove = {
   },
 };
 
-module.exports = { create, remove };
+module.exports = { createOrder, removeOrder };

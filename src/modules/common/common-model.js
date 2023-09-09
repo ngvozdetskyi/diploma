@@ -7,7 +7,7 @@ class BaseModel {
     return crypto.randomUUID();
   }
 
-  getFields(options = {}) {
+  static getFields(options = {}) {
     const result = [];
     const exclude = new Set(options.exclude ?? []);
     const include = new Set(options.include ?? []);

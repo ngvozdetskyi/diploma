@@ -33,8 +33,8 @@ class OrderService {
     await Promise.all(promises);
   }
 
-  async remove(orderId, studentId) {
-    await this.repository.remove({ id: orderId, student_id: studentId });
+  async remove(id) {
+    await this.repository.remove({ id });
   }
 }
 

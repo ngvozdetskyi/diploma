@@ -43,7 +43,7 @@ const updateStudent = {
 };
 
 const removeStudent = {
-  body: {
+  query: {
     type: 'object',
     required: ['id'],
     properties: {

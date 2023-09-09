@@ -4,8 +4,8 @@ class BorrowingModel extends BaseModel {
   constructor(data = {}) {
     super();
     this.id = data.id || this.generateUUID();
-    this.student_id = data.studentId;
-    this.book_id = data.bookId;
+    this.student_id = data.studentId || data.student_id;
+    this.book_id = data.bookId || data.book_id;
     this.receiving_date = data.receivingDate || new Date().toISOString();
     this.return_date = this._getReturnDate(data.returnTermDays);
   }

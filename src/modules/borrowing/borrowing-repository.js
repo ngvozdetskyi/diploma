@@ -8,19 +8,20 @@ class BorrowingRepository extends BaseRepository {
     this.table = 'borrowing';
   }
 
-  async create(data) {
+  async create(data, transaction) {
     const query = this.client(this.table).insert(data);
-    return await this._executeQuery(query, arguments);
+    return await this._executeQuery(query, transaction);
   }
 
-  async find(filter, fields = '*') {
+  async find(filter, fields = '*', options, transaction) {
     const query = this.client(this.table).select(fields).where(filter);
-    return this._executeQuery(query, arguments);
+    this.applyOptions(query, options);
+    return await this._executeQuery(query, transaction);
   }
 
-  async remove(data) {
+  async remove(data, transaction) {
     const query = this.client(this.table).where(data).delete();
-    return await this._executeQuery(query, arguments);
+    return await this._executeQuery(query, transaction);
   }
 }
 

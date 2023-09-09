@@ -41,8 +41,8 @@ class StudentService {
     return students[0];
   }
 
-  remove(data) {
-    return this.repository.remove(data);
+  remove(id) {
+    return this.repository.remove({ id });
   }
 }
 

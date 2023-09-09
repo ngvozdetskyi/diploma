@@ -8,6 +8,15 @@ const bookRoute = require('./modules/book/book-route');
 const borrowingRoute = require('./modules/borrowing/borrowing-route');
 const orderRoute = require('./modules/order/order-route');
 
+const routes = [
+  studentRoute,
+  authRoute,
+  adminRoute,
+  bookRoute,
+  borrowingRoute,
+  orderRoute,
+];
+
 fastify.decorate('verifyToken', verifyToken);
 
 fastify.register(fastifyGuard, {
@@ -16,12 +25,10 @@ fastify.register(fastifyGuard, {
     res.status(403).send('Access denied!');
   },
 });
-fastify.register(studentRoute);
-fastify.register(bookRoute);
-fastify.register(adminRoute);
-fastify.register(authRoute);
-fastify.register(borrowingRoute);
-fastify.register(orderRoute);
+
+routes.forEach((route) => {
+  fastify.register(route);
+});
 
 const start = async () => {
   try {

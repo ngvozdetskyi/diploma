@@ -8,9 +8,10 @@ class AdminRepository extends BaseRepository {
     this.table = 'admin';
   }
 
-  async find(filter, fields = '*') {
+  async find(filter, fields = '*', options, transaction) {
     const query = this.client(this.table).select(fields).where(filter);
-    return await this._executeQuery(query, arguments);
+    this.applyOptions(query, options);
+    return await this._executeQuery(query, transaction);
   }
 }
 
